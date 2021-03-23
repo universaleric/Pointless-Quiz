@@ -1,5 +1,6 @@
 let next = document.querySelector("#next");
 let start = document.querySelector("#start");
+let exit = document.querySelector("#exit");
 let timer = document.querySelector("#timer");
 document.getElementById("start").style.zIndex = 14;
 document.getElementById("next").style.zIndex = 13;
@@ -18,13 +19,16 @@ function startQuiz () {
 
 function nextQuestion () {
     card = slideDeck[index];
-    card = document.getElementById(card);
-    card.style.zIndex = 12;
+    card = document.getElementById(card).style.zIndex = 12;
     index++;
 
     if (timerStart === false) {
         timerStart = true;
         countDown();
+    }
+
+    if (index == 10) {
+      document.getElementById("exit").style.zIndex = 14;
     }
 }
 function countDown() {
@@ -58,4 +62,11 @@ next.addEventListener("click", function(event) {
     
     nextQuestion();
   
+});
+
+exit.addEventListener("click", function(event) {
+  event.stopPropagation();
+  event.preventDefault();
+  window.location.reload();
+
 });
