@@ -1,21 +1,38 @@
-var firstNameInput = document.querySelector("#first-name");
-var lastNameInput = document.querySelector("#last-name");
-var emailInput = document.querySelector("#email");
-var passwordInput = document.querySelector("#password");
-var signUpButton = document.querySelector("#sign-up");
+let next = document.querySelector("#next");
+let start = document.querySelector("#start");
+document.getElementById("start").style.zIndex = 7;
+document.getElementById("next").style.zIndex = 6;
+document.getElementById("c1").style.zIndex = 4;
 
-signUpButton.addEventListener("click", function(event) {
-  event.preventDefault();
+let slideDeck = ["c3", "c4"];
+let index = 0;
+let card = '';
+
+function nextQuestion () {
+    card = slideDeck[index];
+    card = document.getElementById(card);
+    card.style.zIndex = 5;
+    index++;
+}
+
+next.addEventListener("click", function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    nextQuestion();
   
-  // create user object from submission
-  var user = {
-    firstName: firstNameInput.value.trim(),
-    lastName: lastNameInput.value.trim(),
-    email: emailInput.value.trim(),
-    password: passwordInput.value.trim()
-  };
+});
 
-  // set new submission to local storage 
-  localStorage.setItem("user", JSON.stringify(user));
+function startQuiz () {
+    document.getElementById("start").style.zIndex = 0;
+    document.getElementById("c1").style.zIndex = 0;
+    document.getElementById("c2").style.zIndex = 5;
+}
+
+start.addEventListener("click", function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    startQuiz();
   
 });
