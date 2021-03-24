@@ -1,9 +1,11 @@
 let start = document.querySelector("#start");
 let next = document.querySelector("#next");
 let submit = document.querySelector("#submit");
+let submitFinal = document.querySelector("#subFinal");
 let exit = document.querySelector("#exit");
 let timer = document.querySelector("#timer");
 let score = document.querySelector("#score");
+let final = document.querySelector("#final");
 document.getElementById("start").style.zIndex = 15;
 document.getElementById("submit").style.zIndex = 14;
 document.getElementById("next").style.zIndex = 13;
@@ -15,6 +17,7 @@ let card = '';
 let timerStart = false;
 let points = 0;
 let timeLeft;
+let finalTimer = 0;
 score.textContent = "Total Score: " + points;
 
 function startQuiz () {
@@ -35,38 +38,54 @@ function nextQuestion () {
         countDown();
     }
 
-    if (index == 10) {
-      document.getElementById("exit").style.zIndex = 14;
-    }
-    else{
-      document.getElementById("submit").style.zIndex = 14;
-    }
+    document.getElementById("submit").style.zIndex = 14;
+
 }
 
 function submitAns () {
-    document.getElementById("submit").style.zIndex = 0;
     let radios = document.querySelectorAll('input[name="answer"]');
-    let selectedVal;
+    let selectedVal = '';
+    let isSelected = false;
         for (let radio of radios) {
             if (radio.checked) {
                 selectedVal = radio.value;
+                isSelected = true;
+                radio.checked = false;
             }
         }
-        if (selectedVal == "correct") {
+        if (isSelected == false){
+          document.getElementById("submit").style.zIndex = 14;
+        }
+        else if (selectedVal == "correct") {
           document.getElementById("rightAns").style.zIndex = 14;
           points = points + 10;
           score.textContent = "Total Score: " + points;
+          document.getElementById("submit").style.zIndex = 0;
         }
         else{
           document.getElementById("wrongAns").style.zIndex = 14;
           score.textContent = "Total Score: " + points;
           timeLeft = timeLeft - 5;
-        }    
+          document.getElementById("submit").style.zIndex = 0;
+        }
+
+        if (index == 10) {
+          document.getElementById("subFinal").style.zIndex = 14;
+        }
         console.log(selectedVal);
 }
 
+function finalPage() {
+    finalTimer = timeLeft;
+    document.getElementById("c13").style.zIndex = 12;
+    document.getElementById("exit").style.zIndex = 14;
+    document.getElementById("rightAns").style.zIndex = 0;
+    document.getElementById("wrongAns").style.zIndex = 0;
+    final.innerHTML = "Final Score: " + points + "<br />" + "Time Remaining: " + finalTimer;
+}
+
 function countDown() {
-    timeLeft = 90;
+    timeLeft = 180;
   
     let timeInterval = setInterval(function () {
       if (timeLeft > 1) {
@@ -103,6 +122,14 @@ submit.addEventListener("click", function(event) {
     event.preventDefault();
 
     submitAns();
+
+});
+
+submitFinal.addEventListener("click", function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    finalPage();
+  
 
 });
 
