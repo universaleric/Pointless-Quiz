@@ -32,7 +32,7 @@ function nextQuestion () {
     }
 }
 function countDown() {
-    var timeLeft = 30;
+    var timeLeft = 300;
   
     var timeInterval = setInterval(function () {
       if (timeLeft > 1) {

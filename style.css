@@ -77,6 +77,10 @@ label {
     height: 400px;
 }
 
+#c6 h4, #c6 label {
+    color: white;
+}
+
 button {
     position: absolute;
     background-color: #CCA1DF;
@@ -91,5 +95,23 @@ button {
     text-align: center;
     top: 70%;
     left: 74%;
+    transform: translate(-50%, -50%);
+}
+
+#rightAns {
+    position: absolute;
+    color: darkgreen;
+    font-size: 24px;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+#wrongAns {
+    position: absolute;
+    color: darkred;
+    font-size: 24px;
+    top: 50%;
+    left: 30%;
     transform: translate(-50%, -50%);
 }
