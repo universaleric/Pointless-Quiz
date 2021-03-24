@@ -1,5 +1,6 @@
-let next = document.querySelector("#next");
 let start = document.querySelector("#start");
+let next = document.querySelector("#next");
+let submit = document.querySelector("#submit");
 let exit = document.querySelector("#exit");
 let timer = document.querySelector("#timer");
 document.getElementById("start").style.zIndex = 14;
@@ -30,7 +31,29 @@ function nextQuestion () {
     if (index == 10) {
       document.getElementById("exit").style.zIndex = 14;
     }
+    else{
+      document.getElementById("submit").style.zIndex = 14;
+    }
 }
+
+function submitAns () {
+    document.getElementById("submit").style.zIndex = 0;
+    let radios = document.querySelectorAll('input[name="answer"]');
+    let selectedVal;
+        for (let radio of radios) {
+            if (radio.checked) {
+                selectedVal = radio.value;
+            }
+        }
+        if (selectedVal == "correct") {
+          document.getElementById("rightAns").style.zIndex = 14;
+        }
+        else{
+          document.getElementById("wrongAns").style.zIndex = 14;
+        }    
+        console.log(selectedVal);
+}
+
 function countDown() {
     var timeLeft = 300;
   
@@ -62,6 +85,14 @@ next.addEventListener("click", function(event) {
     
     nextQuestion();
   
+});
+
+submit.addEventListener("click", function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    submitAns();
+
 });
 
 exit.addEventListener("click", function(event) {
