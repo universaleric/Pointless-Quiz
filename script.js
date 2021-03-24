@@ -18,6 +18,7 @@ let timerStart = false;
 let points = 0;
 let timeLeft;
 let finalTimer = 0;
+let canceled = false;
 score.textContent = "Total Score: " + points;
 
 function startQuiz () {
@@ -77,11 +78,12 @@ function submitAns () {
 
 function finalPage() {
     finalTimer = timeLeft;
+    canceled = true;
     document.getElementById("c13").style.zIndex = 12;
     document.getElementById("exit").style.zIndex = 14;
     document.getElementById("rightAns").style.zIndex = 0;
     document.getElementById("wrongAns").style.zIndex = 0;
-    final.innerHTML = "Final Score: " + points + "<br />" + "Time Remaining: " + finalTimer;
+    final.innerHTML = "Final Score: " + points + "<br />" + "Time Remaining: " + finalTimer + " seconds.";
 }
 
 function countDown() {
@@ -98,7 +100,16 @@ function countDown() {
         timer.textContent = '';
         clearInterval(timeInterval);
       }
+      if (timeLeft <= 0) {
+        timeLeft = 0;
+        finalPage();
+      }
+      if (canceled == true) {
+        clearInterval(timeInterval);
+      }
     }, 1000);
+
+
   }
 
 start.addEventListener("click", function(event) {
