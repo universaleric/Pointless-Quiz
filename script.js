@@ -3,22 +3,29 @@ let next = document.querySelector("#next");
 let submit = document.querySelector("#submit");
 let exit = document.querySelector("#exit");
 let timer = document.querySelector("#timer");
-document.getElementById("start").style.zIndex = 14;
+let score = document.querySelector("#score");
+document.getElementById("start").style.zIndex = 15;
+document.getElementById("submit").style.zIndex = 14;
 document.getElementById("next").style.zIndex = 13;
-document.getElementById("c1").style.zIndex = 12;
+document.getElementById("c2").style.zIndex = 12;
 
 let slideDeck = ["c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12"];
 let index = 0;
 let card = '';
 let timerStart = false;
+let points = 0;
+let timeLeft;
+score.textContent = "Total Score: " + points;
 
 function startQuiz () {
     document.getElementById("start").style.zIndex = 0;
-    document.getElementById("c1").style.zIndex = 0;
-    document.getElementById("c2").style.zIndex = 12;
+    document.getElementById("c3").style.zIndex = 12;
+    nextQuestion();
 }
 
 function nextQuestion () {
+    document.getElementById("rightAns").style.zIndex = 0;
+    document.getElementById("wrongAns").style.zIndex = 0;
     card = slideDeck[index];
     card = document.getElementById(card).style.zIndex = 12;
     index++;
@@ -47,17 +54,21 @@ function submitAns () {
         }
         if (selectedVal == "correct") {
           document.getElementById("rightAns").style.zIndex = 14;
+          points = points + 10;
+          score.textContent = "Total Score: " + points;
         }
         else{
           document.getElementById("wrongAns").style.zIndex = 14;
+          score.textContent = "Total Score: " + points;
+          timeLeft = timeLeft - 5;
         }    
         console.log(selectedVal);
 }
 
 function countDown() {
-    var timeLeft = 300;
+    timeLeft = 90;
   
-    var timeInterval = setInterval(function () {
+    let timeInterval = setInterval(function () {
       if (timeLeft > 1) {
         timer.textContent = timeLeft + ' seconds remaining';
         timeLeft--;

@@ -13,13 +13,30 @@ body {
   height: 100%;
 }
 
+h1 {
+    font-size: 48px;
+    color: white;
+    position: absolute;
+    top: 13%;
+    left: 28%;
+    transform: translate(-50%, -50%) 
+}
+
 h2 {
     color:white;
     position: absolute;
-    top: 80%;
-    left: 75%;
-    transform: translate(-50%, -50%)
+}
 
+#timer {
+    top: 78%;
+    left: 74%;
+    transform: translate(-50%, -50%)
+}
+
+#score {
+    top: 78%;
+    left: 23%;
+    transform: translate(-50%, -50%)
 }
 
 h3 {
@@ -27,6 +44,12 @@ h3 {
 }
 
 h4 {
+    color:#6C2E88;
+}
+
+p {
+    font-size: 28px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color:#6C2E88;
 }
 
@@ -38,26 +61,6 @@ h4 {
 label {
     color: #212121;
 }
-
-/* input {
-    background-color: whitesmoke;
-    border-radius: 3px;
-    border-width: 1px;
-    color: #5f6368;
-    font-size: 1.1em;
-    height: 45px;
-    line-height: 20px;
-    margin: 0;
-    margin-top: 10px;
-    max-width: 100%;
-    padding: 8px 8px 8px 8px;
-    transition-delay: 0s, 0s;
-    transition-duration: 0.2s, 0.2s;
-    transition-property: background-color, color;
-    transition-timing-function: ease, ease;
-    vertical-align: middle;
-    width: 100%;
-} */
 
 .page {
     position: relative;
@@ -101,17 +104,17 @@ button {
 #rightAns {
     position: absolute;
     color: darkgreen;
-    font-size: 24px;
-    top: 50%;
-    left: 30%;
+    font-size: 48px;
+    top: 55%;
+    left: 74%;
     transform: translate(-50%, -50%);
 }
 
 #wrongAns {
     position: absolute;
     color: darkred;
-    font-size: 24px;
-    top: 50%;
-    left: 30%;
+    font-size: 48px;
+    top: 55%;
+    left: 74%;
     transform: translate(-50%, -50%);
 }
