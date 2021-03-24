@@ -66,7 +66,7 @@ function submitAns () {
         else{
           document.getElementById("wrongAns").style.zIndex = 14;
           score.textContent = "Total Score: " + points;
-          timeLeft = timeLeft - 5;
+          timeLeft = timeLeft - 10;
           document.getElementById("submit").style.zIndex = 0;
         }
 
