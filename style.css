@@ -22,6 +22,15 @@ h1 {
     transform: translate(-50%, -50%) 
 }
 
+#gameOver {
+    font-size: 30px;
+    color: #6C2E88;
+    top: 0%;
+    left: 10%;
+    transform: translate(-50%, -50%)
+    
+}
+
 h2 {
     color:white;
     position: absolute;
@@ -121,4 +130,11 @@ button {
     top: 55%;
     left: 74%;
     transform: translate(-50%, -50%);
+}
+
+#c13 div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }
