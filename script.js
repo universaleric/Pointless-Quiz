@@ -21,6 +21,18 @@ let finalTimer = 0;
 let canceled = false;
 score.textContent = "Total Score: " + points;
 
+let highScores = JSON.parse(localStorage.getItem("highScore")) || [];
+// highScore = [{
+//   initials: "jh",
+//   endScore: 30,
+//   time: 120
+// },
+// {
+//   initials: "eh",
+//   endScore: 40,
+//   time: 80
+// }]
+
 function startQuiz () {
     document.getElementById("start").style.zIndex = 0;
     document.getElementById("c3").style.zIndex = 12;
@@ -84,7 +96,18 @@ function finalPage() {
     document.getElementById("rightAns").style.zIndex = 0;
     document.getElementById("wrongAns").style.zIndex = 0;
     final.innerHTML = "Final Score: " + points + "<br />" + "Time Remaining: " + finalTimer + " seconds.";
-}
+    let initials = prompt("Please enter your three initials:");
+    while (initials.length > 3) {
+      initials = prompt("Please enter your three initials:");
+    }
+    let setHighScores = {
+      initals: initials,
+      endScore: points,
+      endTime: finalTimer 
+    };
+    highScores.push(setHighScores);
+    localStorage.setItem("highscores", JSON.stringify(highScores));
+  }
 
 function countDown() {
     timeLeft = 180;
@@ -111,6 +134,8 @@ function countDown() {
 
 
   }
+
+
 
 start.addEventListener("click", function(event) {
     event.stopPropagation();
