@@ -6,6 +6,7 @@ let exit = document.querySelector("#exit");
 let timer = document.querySelector("#timer");
 let score = document.querySelector("#score");
 let final = document.querySelector("#final");
+let highCard = document.querySelector("#highScores");
 document.getElementById("start").style.zIndex = 15;
 document.getElementById("submit").style.zIndex = 14;
 document.getElementById("next").style.zIndex = 13;
@@ -21,17 +22,7 @@ let finalTimer = 0;
 let canceled = false;
 score.textContent = "Total Score: " + points;
 
-let highScores = JSON.parse(localStorage.getItem("highScore")) || [];
-// highScore = [{
-//   initials: "jh",
-//   endScore: 30,
-//   time: 120
-// },
-// {
-//   initials: "eh",
-//   endScore: 40,
-//   time: 80
-// }]
+let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
 function startQuiz () {
     document.getElementById("start").style.zIndex = 0;
@@ -85,7 +76,7 @@ function submitAns () {
         if (index == 10) {
           document.getElementById("subFinal").style.zIndex = 14;
         }
-        console.log(selectedVal);
+        // console.log(selectedVal);
 }
 
 function finalPage() {
@@ -96,17 +87,31 @@ function finalPage() {
     document.getElementById("rightAns").style.zIndex = 0;
     document.getElementById("wrongAns").style.zIndex = 0;
     final.innerHTML = "Final Score: " + points + "<br />" + "Time Remaining: " + finalTimer + " seconds.";
-    let initials = prompt("Please enter your three initials:");
-    while (initials.length > 3) {
-      initials = prompt("Please enter your three initials:");
+    let promptInitials = prompt("Please enter your three initials:");
+    let initials = promptInitials.toUpperCase();
+    // console.log(initials);
+    while (promptInitials.length > 3 || promptInitials.length < 3) {
+      promptInitials = prompt("Please enter your three initials:");
     }
     let setHighScores = {
-      initals: initials,
+      initials: initials,
       endScore: points,
       endTime: finalTimer 
     };
+
     highScores.push(setHighScores);
-    localStorage.setItem("highscores", JSON.stringify(highScores));
+
+    highScores.sort(function(a, b) {
+      return a.endScore - b.endScore;
+    });
+
+    highScores.sort(function(a, b) {
+      return a.endTime - b.endTime;
+    });
+
+    // console.log(highScores);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    displayScore();
   }
 
 function countDown() {
@@ -135,6 +140,47 @@ function countDown() {
 
   }
 
+let displayScore = function() {
+  
+if (highScores.length > 5){
+  for (let i = (highScores.length - 5); i < highScores.length; i++) {
+    // console.log(highScores[i]);
+
+    let table = document.getElementById("highScores");
+  
+    let resultsRow = table.insertRow(1);
+    let cell1 = resultsRow.insertCell(0);
+    let cell2 = resultsRow.insertCell(1);
+    let cell3 = resultsRow.insertCell(2);
+    let cell4 = resultsRow.insertCell(3);
+    
+    if(highScores.length - i != 0){
+    cell1.innerHTML = (highScores.length - i) + ".";}
+    cell2.innerHTML = highScores[i].initials;
+    cell3.innerHTML = highScores[i].endScore;
+    cell4.innerHTML = highScores[i].endTime;
+  }
+}
+
+  else{
+    for (let i = 0; i < 5; i++) {
+    // console.log(highScores[i]);
+
+    let table = document.getElementById("highScores");
+  
+    let resultsRow = table.insertRow(1);
+    let cell1 = resultsRow.insertCell(0);
+    let cell2 = resultsRow.insertCell(1);
+    let cell3 = resultsRow.insertCell(2);
+    let cell4 = resultsRow.insertCell(3);
+    
+    if(highScores.length - i != 0){
+    cell1.innerHTML = (highScores.length - i) + ".";}
+    cell2.innerHTML = highScores[i].initials;
+    cell3.innerHTML = highScores[i].endScore;
+    cell4.innerHTML = highScores[i].endTime;
+  }
+}}
 
 
 start.addEventListener("click", function(event) {
